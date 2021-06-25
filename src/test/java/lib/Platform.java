@@ -58,7 +58,7 @@ public class Platform {
         return my_platform.equals(platform);
     }
 
-    private String getPlatform() {
+    public String getPlatform() {
         return System.getenv("PLATFORM");
     }
 }

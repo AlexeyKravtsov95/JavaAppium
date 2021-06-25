@@ -1,5 +1,6 @@
 package lib;
 
+import io.appium.java_client.AppiumDriver;
 import junit.framework.TestCase;
 import org.openqa.selenium.ScreenOrientation;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -27,14 +28,31 @@ public class CoreTestCase extends TestCase {
     }
 
     protected void rotateScreenPortrait() {
-        driver.rotate(ScreenOrientation.PORTRAIT);
+        if (driver instanceof AppiumDriver) {
+            AppiumDriver driver = (AppiumDriver) this.driver;
+            driver.rotate(ScreenOrientation.PORTRAIT);
+        } else {
+            System.out.println("Method rotateScreenPortrait() does nothing for platform" + Platform.getInstance().getPlatform());
+        }
     }
 
     protected void rotateScreenLandscape() {
-        driver.rotate(ScreenOrientation.LANDSCAPE);
+
+        if (driver instanceof AppiumDriver) {
+            AppiumDriver driver = (AppiumDriver) this.driver;
+            driver.rotate(ScreenOrientation.LANDSCAPE);
+        } else {
+            System.out.println("Method rotateScreenPortrait() does nothing for platform" + Platform.getInstance().getPlatform());
+        }
     }
 
     protected void backgroundApp(int seconds) {
-        driver.runAppInBackground(Duration.ofDays(seconds));
+
+        if (driver instanceof AppiumDriver) {
+            AppiumDriver driver = (AppiumDriver) this.driver;
+            driver.runAppInBackground(Duration.ofDays(seconds));
+        } else {
+            System.out.println("Method backgroundAPP() does nothing for platform" + Platform.getInstance().getPlatform());
+        }
     }
 }
